@@ -11,11 +11,11 @@ export default (db) => {
                 .required(),
             maxPlayers: Joi.number().default(2), // To start the game
             minPlayers: Joi.number().default(2),
-            status: Joi.string().allow('WON', 'DRAWN'),
+            status: Joi.string().allow('WON', 'DRAWN','STARTED'),
+            firstPlayer: Joi.string(),
             winner: Joi.string(),
             hasWinner: Joi.string(),
-            gameOver: Joi.boolean(),
-            firstPlayer: Joi.string(),
+            gameOver: Joi.boolean().default(false),
         })
         constructor(){
             super(db, 'game')

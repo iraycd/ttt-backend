@@ -63,17 +63,16 @@ const cqrsPreprocess = () => {
     await cqrsHandler(action, ctx);
   };
   const queryExec = async ctx => {
-
-    const query = JSON.parse(ctx.request.query.action);
-    const action = ctx.state.container.resolve(query.action);
+    const body = ctx.request.body;
+    const action = ctx.state.container.resolve(body.action);
     let model = {};
-    if (typeof (query.model) == "object") {
-      model = query.model
+    if (typeof (body.model) == "object") {
+      model = body.model
     } else {
-      model = JSON.parse(decodeURIComponent(query.model));
+      model = JSON.parse(decodeURIComponent(body.model));
     }
     action.init(model);
-    return await cqrsHandler(action, ctx);
+    return cqrsHandler(action, ctx);
   };
 
   const cqrsHandler = async (action, ctx) => {
@@ -96,10 +95,10 @@ const cqrsPreprocess = () => {
     return ctx;
   };
   return {
+    queryExec,
     queryExecAsync: async ctx => {
       return await queryExec(ctx);
     },
-    queryExec,
     commandExec,
     commandExecAsync: async ctx => {
       return await commandExec(ctx);
@@ -109,7 +108,7 @@ const cqrsPreprocess = () => {
 };
 
 const api = makeInvoker(cqrsPreprocess);
-router.get("/query", api("queryExecAsync"));
+router.post("/query", koaBody, api("queryExecAsync"));
 router.post("/command", koaBody, api("commandExecAsync"));
 app.use(router.routes());
 app.listen(process.env.PORT || 1337);

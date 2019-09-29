@@ -2,7 +2,7 @@ import * as R  from 'ramda';
 import { DocumentCollection } from "arangojs"
 import { NotFound, BadRequest, NotExtended } from 'fejl'
 import { hasWon, isDraw } from '../../Helpers/gameHelper';
-var builder = require('mongo-aql');
+import * as builder from 'mongo-aql';
 
 
 interface Dependencies {arangoDI}
@@ -90,7 +90,7 @@ export default class MakeMoveCommand {
         // Get the game
         const gameValue = await this.gameModel.get( this.value.game )
         BadRequest.assert(gameValue, "Game is not found")
-        BadRequest.assert(!gameValue.status, `Game was ${gameValue.status}`)
+        BadRequest.assert(!gameValue.gameOver, `Game over`)
         const initialGamer = gameValue.firstPlayer
 
         // Check if the gamer belongs to the game.

@@ -27,8 +27,7 @@ export default class AddGamerToGameCommand {
         const gamerCountInGameCheck = builder('gamers_in_game', {_to:`game/${this.value.game}`})
         const gamerCountInGameCheckQueryCursor = await this.arangoDI.db.query(gamerCountInGameCheck.query, gamerCountInGameCheck.values)
         NotFound.assert(gamerCountInGameCheckQueryCursor._result.length < gameValue.maxPlayers, "Max. Limit has been reached")
-        // return gamerCountInGameCheckQueryCursor._result
-
-        return this.model.link(this.value)
+        await this.model.link(this.value)
+        await this.gameModel.update(gameValue._key, { status:'STARTED'})
     }
 };
