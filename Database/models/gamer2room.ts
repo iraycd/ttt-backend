@@ -1,19 +1,18 @@
 import { EdgeModel } from "../../Architecture/baseMode";
-const Joi = require('@hapi/joi');
+import * as Joi from "joi";
 
-
-export default (db) => {
-    class Game2Room extends EdgeModel {
-        schema = Joi.object({
-            room: Joi.string().required(),
-            gamer: Joi.string().required()
-        })
-        constructor(){
-            super(db, 'gamers_in_room',{
-                _from:'room',
-                _to:'gamer'
-            })
-        }
+export default db => {
+  class Game2Room extends EdgeModel {
+    schema = Joi.object({
+      room: Joi.string().required(),
+      gamer: Joi.string().required()
+    });
+    constructor() {
+      super(db, "gamers_in_room", {
+        _from: "room",
+        _to: "gamer"
+      });
     }
-    return Game2Room
-}
+  }
+  return Game2Room;
+};

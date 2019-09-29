@@ -1,20 +1,19 @@
 import BaseModel from "../../Architecture/baseMode";
-const Joi = require('@hapi/joi');
+import * as Joi from "joi";
 
+export default db => {
+  class Gamer extends BaseModel {
+    schema = Joi.object({
+      name: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30)
+        .required()
+    });
 
-export default (db) => {
-    class Gamer extends BaseModel {
-        schema = Joi.object({
-            name: Joi.string()
-                .alphanum()
-                .min(3)
-                .max(30)
-                .required()
-        })
-
-        constructor(){
-            super(db, 'gamer')
-        }
+    constructor() {
+      super(db, "gamer");
     }
-    return Gamer
-}
+  }
+  return Gamer;
+};

@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "forceConsistentCasingInFileNames": true,
+      "module": "es6",
+      "moduleResolution": "node",
+      "noImplicitAny": true,
+      "preserveConstEnums": true,
+      "target": "es5"
+    },
+    "include": ["./**/*.ts", "./src/**/*.tsx"],
+    "exclude": [
+      "node_modules"
+    ]
+  }
