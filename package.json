@@ -1,0 +1,39 @@
+{
+  "name": "ttt-cqrs",
+  "version": "1.0.0",
+  "main": "index",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon -e ts --watch '*.ts' --exec 'ts-node' index.ts"
+  },
+  "dependencies": {
+    "@hapi/joi": "^16.1.4",
+    "@types/bcryptjs": "^2.4.2",
+    "arangojs": "^6.11.1",
+    "awilix": "^4.2.2",
+    "awilix-koa": "^4.0.0",
+    "bcryptjs": "^2.4.3",
+    "better-validator": "^2.1.8",
+    "circular-json": "^0.5.9",
+    "fejl": "^2.3.2",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.8.1",
+    "koa-body": "^4.1.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa2-cors": "^2.0.6",
+    "mongo-aql": "^0.5.10",
+    "node-json-db": "^1.0.1",
+    "ramda": "^0.26.1",
+    "sequelize": "^5.19.1",
+    "sqlite3": "^4.1.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3",
+    "uuid": "^3.3.3",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}
