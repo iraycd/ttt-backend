@@ -15,18 +15,18 @@ export default class GetGameDetailed {
     }
     async run() {
         const {id} = this.value
-        const gameDetailQuery =  aql`
-            let gamer = (
-                FOR value IN 1..1 INBOUND "game/${id}" gamers_in_game
+        const gameDetailQuery = aql`
+            let gamers = (
+                FOR value IN 1..1 INBOUND CONCAT('game/',${id}) gamers_in_game
                     RETURN value
             )
-            let move = (
+            let moves = (
                 FOR m IN move
-                    FILTER m.game == "${id}"
+                    FILTER m.game == CONCAT(${id})
                     RETURN m
             )
-            let game = DOCUMENT("game/${id}")
-            RETURN MERGE(game, {gamer, move})
+            let game = DOCUMENT(CONCAT('game/',${id}))
+            RETURN MERGE(game,{gamers, moves})
         `
         const gameListQueryCursor = await this.arangoDI.db.query(gameDetailQuery)
         return gameListQueryCursor._result
