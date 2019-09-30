@@ -4,7 +4,7 @@
   "main": "index",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon -e ts --watch '*.ts' --exec 'ts-node' index.ts",
+    "start": "nodemon -e ts --watch '*.ts' --exec 'ts-node' src/index.ts",
     "lint": "yarn lint:code",
     "lint:code": "eslint",
     "lint:fix": "yarn lint:code --fix",
