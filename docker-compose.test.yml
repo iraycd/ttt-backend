@@ -1,0 +1,31 @@
+version: '2'
+services:
+  db:
+    container_name: ttt-db
+    image: arangodb:3.5
+    ports:
+      - 8529:8529
+    environment: 
+      ARANGO_NO_AUTH: 1
+    volumes:
+      - "db-data:/var/lib/arangodb3"
+      - "app-data:/var/lib/arangodb3-apps"
+  app:
+    container_name: ttt-test-app
+    tty: true
+    build: .
+    command: sh -c "/wait && yarn test"
+    links:
+      - "db"
+    volumes:
+      - "./src:/app/src"
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+
+volumes:
+  db-data:
+    driver: local
+  app-data:
+    driver: local

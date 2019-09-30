@@ -38,7 +38,6 @@ export async function createServer() {
   app.use(scopePerRequest(container));
   // Let's do that now!
   app.use((ctx, next) => {
-    console.log(ctx.state.container);
     ctx.state.container.register({
       // Imagine some auth middleware somewhere...
       // This makes currentUser available to all services!
