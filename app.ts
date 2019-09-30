@@ -48,7 +48,7 @@ export async function createServer() {
   });
 
   const cqrsPreprocess = () => {
-    const cqrsHandler = async (action, ctx) => {
+    const cqrsHandler = async (action: any, ctx: any) => {
       let result = null;
       try {
         const token = ctx.request.header.authorization;
@@ -73,7 +73,7 @@ export async function createServer() {
       }
       return ctx;
     };
-    const commandExec = async ctx => {
+    const commandExec = async (ctx: any) => {
       const body = ctx.request.body;
       const action = ctx.state.container.resolve(body.action);
       let model = {};
@@ -85,7 +85,7 @@ export async function createServer() {
       action.init(model);
       await cqrsHandler(action, ctx);
     };
-    const queryExec = async ctx => {
+    const queryExec = async (ctx: any) => {
       const body = ctx.request.body;
       const action = ctx.state.container.resolve(body.action);
       let model = {};
@@ -100,11 +100,11 @@ export async function createServer() {
 
     return {
       queryExec,
-      queryExecAsync: async ctx => {
+      queryExecAsync: async (ctx: any) => {
         return await queryExec(ctx);
       },
       commandExec,
-      commandExecAsync: async ctx => {
+      commandExecAsync: async (ctx: any) => {
         return await commandExec(ctx);
       },
       cqrsHandler

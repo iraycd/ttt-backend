@@ -15,7 +15,7 @@ import GetGameDetailed from "./Query/Game/getGameQuery";
 const { createContainer, asValue, asClass } = awilix;
 const ContainerAwlix = createContainer();
 
-const exporter = {
+const exporter: any = {
   arangoDI: asValue(ArangoDB)
 };
 

@@ -16,22 +16,14 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "yarn lint:fix",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "yarn hooks:pre-push",
-      "pre-commit": "yarn hooks:pre-commit",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/circular-json": "^0.4.0",
     "@types/hapi__joi": "^15.0.4",
+    "@types/joi": "^14.3.3",
+    "@types/koa": "^2.0.50",
+    "@types/koa-router": "^7.0.42",
+    "@types/koa2-cors": "^2.0.1",
     "arangojs": "^6.11.1",
     "awilix": "^4.2.2",
     "awilix-koa": "^4.0.0",

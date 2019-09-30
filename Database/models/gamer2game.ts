@@ -1,7 +1,8 @@
 import { EdgeModel } from "../../Architecture/baseMode";
 import * as Joi from "joi";
+import { Database } from "arangojs";
 
-export default db => {
+export default (db: Database) => {
   class Game2Room extends EdgeModel {
     schema = Joi.object({
       gamer: Joi.string().required(),

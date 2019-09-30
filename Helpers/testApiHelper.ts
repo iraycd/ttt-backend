@@ -9,8 +9,8 @@ import { AddressInfo } from "net";
  *
  * @param {number} status
  */
-export function assertStatus(status) {
-  return async function statusAsserter(resp) {
+export function assertStatus(status: number) {
+  return async function statusAsserter(resp: any) {
     if (resp.status !== status) {
       throw new Error(
         `Expected ${status} but got ${resp.status}: ${resp.request.method} ${resp.request.path}`
@@ -33,8 +33,8 @@ export async function apiHelper() {
   });
   return {
     client,
-    command: data => client.post("/command", data).then(assertStatus(200)),
-    query: data => client.post("/query", data).then(assertStatus(200))
+    command: (data: any) => client.post("/command", data).then(assertStatus(200)),
+    query: (data: any) => client.post("/query", data).then(assertStatus(200))
   };
 }
 

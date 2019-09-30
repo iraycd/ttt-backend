@@ -11,11 +11,11 @@ export default class BaseModel {
     this.model = model;
     this.collection = db.collection(model);
   }
-  save = async obj => {
-    const value = await this.schema.validateAsync(obj);
+  save = async (obj: any) => {
+    const value = await this.schema.validate(obj);
     return this.collection.save(value);
   };
-  get = async id => {
+  get = async (id: string) => {
     try {
       const data = await this.collection.document(id);
       return data;
@@ -27,7 +27,7 @@ export default class BaseModel {
     }
   };
 
-  update = async (id, data) => {
+  update = async (id: string, data: string) => {
     try {
       const result = await this.collection.update(id, data);
       return result;
@@ -39,6 +39,11 @@ export default class BaseModel {
     }
   };
 }
+
+interface edge {
+  _from: string
+  _to: string
+}
 export class EdgeModel {
   public schema: Joi.Schema;
   public collection: EdgeCollection;
@@ -48,7 +53,7 @@ export class EdgeModel {
   private _toCollection: BaseCollection;
   private _fromCollection: BaseCollection;
 
-  constructor(db: Database, model: string, { _from, _to }) {
+  constructor(db: Database, model: string, { _from, _to }: edge) {
     this.model = model;
     this.collection = db.edgeCollection(model);
     this._from = _from;
@@ -56,8 +61,8 @@ export class EdgeModel {
     this._fromCollection = db.collection(_from);
     this._toCollection = db.collection(_to);
   }
-  link = async obj => {
-    const value = await this.schema.validateAsync(obj);
+  link = async (obj: any) => {
+    const value = await this.schema.validate(obj);
     const savedEdge = await this.collection.save({
       _from: `${this._from}/${value[this._from]}`,
       _to: `${this._to}/${value[this._to]}`
