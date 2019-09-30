@@ -4,9 +4,9 @@
   "main": "index",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon -e ts --watch '*.ts' --exec 'ts-node' src/index.ts",
+    "start": "nodemon -e ts --watch './src/**/*.ts' --exec 'ts-node' src/index.ts",
     "lint": "yarn lint:code",
-    "lint:code": "eslint",
+    "lint:code": "eslint src/**/**/*.ts",
     "lint:fix": "yarn lint:code --fix",
     "hooks:pre-push": "yarn lint && yarn test",
     "hooks:pre-commit": "lint-staged",
